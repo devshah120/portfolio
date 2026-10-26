@@ -1,0 +1,144 @@
+.section {
+  padding-top: var(--sp-5);
+}
+
+.hero {
+  display: grid;
+  gap: var(--sp-6);
+  grid-template-areas:
+    "status"
+    "head"
+    "art"
+    "body";
+  align-items: start;
+}
+
+@media (min-width: 900px) {
+  .hero {
+    grid-template-columns: 1.1fr 0.9fr;
+    column-gap: var(--sp-8);
+    row-gap: var(--sp-6);
+    grid-template-areas:
+      "status status"
+      "head art"
+      "body art";
+  }
+}
+
+.status {
+  grid-area: status;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  gap: var(--sp-2) var(--sp-5);
+  padding-bottom: var(--sp-3);
+  border-bottom: 1px solid var(--line);
+  font-family: var(--font-label), var(--font-sans), system-ui, sans-serif;
+  font-weight: 700;
+  font-size: var(--fs-label);
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--fg-soft);
+}
+
+.statusItem {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--sp-2);
+}
+
+.hideSm {
+  display: none;
+}
+
+@media (min-width: 640px) {
+  .hideSm {
+    display: inline-flex;
+  }
+}
+
+.head {
+  grid-area: head;
+  align-self: end;
+}
+
+.portrait {
+  grid-area: art;
+  min-width: 0;
+  align-self: center;
+}
+
+.body {
+  grid-area: body;
+}
+
+.kicker {
+  display: inline-block;
+  padding: var(--sp-2) var(--sp-4);
+  background: var(--fg);
+  color: var(--bg);
+  box-shadow: 5px 5px 0 var(--accent);
+  font-family: var(--font-label), var(--font-sans), system-ui, sans-serif;
+  font-weight: 700;
+  font-size: var(--fs-label);
+  line-height: 1.5;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+}
+
+/* Name always sits on one line; size is tied to the column width */
+.name {
+  margin-top: var(--sp-6);
+  font-size: clamp(2.5rem, 14vw, 7rem);
+  line-height: 0.9;
+  letter-spacing: -0.03em;
+  text-transform: uppercase;
+  white-space: nowrap;
+}
+
+@media (min-width: 900px) {
+  .name {
+    font-size: clamp(3rem, 9vw, 9rem);
+  }
+}
+
+.dot {
+  color: var(--accent);
+}
+
+.lead {
+  max-width: 38rem;
+  font-size: var(--fs-lead);
+  color: color-mix(in oklab, var(--fg) 82%, var(--bg));
+}
+
+.ctas {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--sp-3);
+  margin-top: var(--sp-6);
+}
+
+.facts {
+  list-style: none;
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--sp-2);
+  margin-top: var(--sp-6);
+  padding: 0;
+}
+
+.facts li {
+  white-space: normal;
+}
+
+.facts span {
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  font-size: 0.625rem;
+  color: var(--accent);
+}
+
+.facts strong {
+  font-weight: 400;
+}

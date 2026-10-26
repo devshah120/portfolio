@@ -1,0 +1,231 @@
+.sectionTitle {
+  font-size: var(--fs-h1);
+  line-height: var(--lh-heading);
+  margin-top: var(--sp-5);
+  max-width: 18ch;
+}
+
+.sectionIntro {
+  margin-top: var(--sp-5);
+  max-width: 46rem;
+  font-size: var(--fs-lead);
+  color: color-mix(in oklab, var(--fg) 80%, var(--bg));
+}
+
+.more {
+  display: flex;
+  margin-top: var(--sp-6);
+}
+
+/* ---------- Selected work: bento ---------- */
+
+.selected {
+  list-style: none;
+  padding: 0;
+  display: grid;
+  gap: var(--sp-3);
+  margin-top: var(--sp-7);
+}
+
+.selected > li {
+  min-width: 0;
+}
+
+.selected > li > * {
+  height: 100%;
+}
+
+@media (min-width: 900px) {
+  .selected {
+    grid-template-columns: repeat(2, 1fr);
+    gap: var(--sp-4);
+  }
+
+  /* Tall lead card only when there are exactly three; 2 or 4 sit in an even grid */
+  .selected > li:first-child:nth-last-child(3) {
+    grid-row: span 2;
+  }
+}
+
+/* ---------- Capabilities ---------- */
+
+.capSection {
+  margin-block: 0;
+}
+
+.capGrid {
+  list-style: none;
+  padding: 0;
+  display: grid;
+  gap: var(--sp-3);
+  margin-top: var(--sp-7);
+}
+
+.cap {
+  padding: var(--sp-5);
+}
+
+.cap h3 {
+  display: flex;
+  align-items: baseline;
+  gap: var(--sp-3);
+  font-size: 1.75rem;
+  line-height: 1.1;
+}
+
+.cap h3 span {
+  font-family: var(--font-label), var(--font-sans), system-ui, sans-serif;
+  font-weight: 700;
+  font-size: var(--fs-label);
+  letter-spacing: 0.08em;
+  color: var(--accent);
+}
+
+.chips {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--sp-2);
+  margin-top: var(--sp-4);
+}
+
+.chips :global(.chip) {
+  white-space: normal;
+}
+
+/* ---------- What I do ---------- */
+
+.offer {
+  list-style: none;
+  padding: 0;
+  display: grid;
+  gap: var(--sp-3);
+  margin-top: var(--sp-7);
+  counter-reset: offer;
+}
+
+.offer li {
+  padding: var(--sp-5);
+}
+
+.offer h3 {
+  font-size: clamp(1.75rem, 2.6vw, 2.25rem);
+  line-height: 1.05;
+}
+
+.offer h3::before {
+  counter-increment: offer;
+  content: counter(offer, decimal-leading-zero) " /";
+  display: block;
+  margin-bottom: var(--sp-4);
+  font-family: var(--font-label), var(--font-sans), system-ui, sans-serif;
+  font-weight: 700;
+  font-size: var(--fs-label);
+  letter-spacing: 0.08em;
+  color: var(--accent);
+}
+
+.offer p {
+  margin-top: var(--sp-3);
+  color: color-mix(in oklab, var(--fg) 75%, var(--bg));
+}
+
+/* ---------- Approach ---------- */
+
+.principles {
+  list-style: none;
+  padding: 0;
+  display: grid;
+  margin-top: var(--sp-7);
+  border-top: 1px solid var(--line);
+}
+
+.principles li {
+  padding: var(--sp-5) 0;
+  border-bottom: 1px solid var(--line);
+}
+
+.principles h3 {
+  font-size: 1.75rem;
+  line-height: 1.1;
+}
+
+.principles h3::before {
+  content: "—";
+  margin-right: var(--sp-2);
+  color: var(--accent);
+}
+
+.principles p {
+  margin-top: var(--sp-3);
+  max-width: 40rem;
+  color: color-mix(in oklab, var(--fg) 75%, var(--bg));
+}
+
+/* ---------- Teaser ---------- */
+
+.teaser {
+  display: grid;
+  gap: var(--sp-6);
+  padding: var(--sp-6);
+}
+
+.teaserText {
+  font-size: var(--fs-lead);
+  max-width: 40rem;
+  margin-top: var(--sp-5);
+  color: color-mix(in oklab, var(--fg) 80%, var(--bg));
+}
+
+.teaserCtas {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--sp-3);
+  align-content: end;
+}
+
+@media (min-width: 640px) {
+  .capGrid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .offer {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (min-width: 900px) {
+  .capGrid {
+    grid-template-columns: repeat(3, 1fr);
+    gap: var(--sp-4);
+  }
+
+  .offer {
+    gap: var(--sp-4);
+  }
+
+  .offer li,
+  .cap {
+    padding: var(--sp-6);
+  }
+
+  .principles {
+    grid-template-columns: repeat(3, 1fr);
+    border-top: 0;
+    gap: var(--sp-6);
+  }
+
+  .principles li {
+    padding: var(--sp-5) 0 0;
+    border-bottom: 0;
+    border-top: 1px solid var(--line);
+  }
+
+  .teaser {
+    grid-template-columns: 1.4fr 1fr;
+    padding: var(--sp-8);
+  }
+
+  .teaserCtas {
+    justify-content: end;
+  }
+}

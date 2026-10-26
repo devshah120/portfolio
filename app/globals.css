@@ -1,0 +1,629 @@
+:root {
+  color-scheme: dark;
+
+  /* Surfaces */
+  --bg: #101113;
+  --bg-deep: #0a0b0c;
+  --card: #17181b;
+  --card-hover: #1b1c20;
+
+  /* Ink */
+  --fg: #e8e5de;
+  --fg-soft: #8f939a;
+  --fg-faint: #5a6068;
+
+  /* Lines */
+  --line: #2d3035;
+  --line-strong: #4a4e55;
+
+  /* Accent — coral */
+  --accent: #ff6b55;
+  --accent-ink: #101113;
+  --accent-soft: color-mix(in oklab, var(--accent) 14%, transparent);
+  --ok: #34c97b;
+  --danger: #ff8a80;
+
+  /* Legacy aliases (kept so older/unused components still resolve) */
+  --ink: var(--bg);
+  --paper: var(--fg);
+  --paper-deep: var(--card);
+  --signal: var(--accent);
+  --concrete: var(--fg-soft);
+  --surface: var(--card);
+  --line-on-dark: var(--line);
+
+  --border: 1px solid var(--line);
+  --border-strong: 1px solid var(--line-strong);
+  --border-thin: 1px solid var(--line);
+
+  --sp-1: 0.25rem;
+  --sp-2: 0.5rem;
+  --sp-3: 0.75rem;
+  --sp-4: 1rem;
+  --sp-5: 1.5rem;
+  --sp-6: 2rem;
+  --sp-7: 3rem;
+  --sp-8: 4rem;
+  --sp-9: 6rem;
+  --sp-10: 8rem;
+
+  --fs-display: clamp(3.25rem, 10vw, 9rem);
+  --fs-h1: clamp(2.5rem, 6vw, 4.75rem);
+  --fs-h2: clamp(1.75rem, 3.4vw, 2.75rem);
+  --fs-lead: clamp(1.0625rem, 1.5vw, 1.25rem);
+  --fs-body: 1rem;
+  --fs-small: 0.875rem;
+  --fs-label: 0.6875rem;
+  --lh-tight: 0.92;
+  --lh-heading: 1.02;
+  --lh-body: 1.65;
+
+  --ease: cubic-bezier(0.2, 0.8, 0.2, 1);
+
+  --maxw: 88rem;
+  --gutter: clamp(1rem, 4vw, 2.5rem);
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+* {
+  margin: 0;
+}
+
+html {
+  scroll-behavior: smooth;
+  scrollbar-gutter: stable;
+  background: var(--bg);
+}
+
+/* Brutalist scrollbar: striped coral track, checkered thumb, pixel arrow buttons.
+   Firefox only supports colors, so it gets a simplified version. */
+@supports not selector(::-webkit-scrollbar) {
+  html {
+    scrollbar-width: thin;
+    scrollbar-color: var(--fg) var(--accent);
+  }
+}
+
+html::-webkit-scrollbar {
+  width: 14px;
+  background-color: var(--accent);
+  border-left: 2px solid var(--bg);
+}
+
+html::-webkit-scrollbar-track {
+  background-color: var(--accent);
+  background-image: repeating-linear-gradient(
+    180deg,
+    rgba(16, 17, 19, 0.35) 0 2px,
+    transparent 2px 10px
+  );
+  border-left: 2px solid var(--bg);
+}
+
+html::-webkit-scrollbar-thumb {
+  background-color: transparent;
+  background-image: repeating-conic-gradient(var(--bg) 0% 25%, var(--fg) 0% 50%);
+  background-size: 8px 8px;
+  border: 2px solid var(--bg);
+  border-radius: 0;
+  min-height: 40px;
+}
+
+html::-webkit-scrollbar-thumb:hover {
+  background-image: repeating-conic-gradient(var(--fg) 0% 25%, var(--bg) 0% 50%);
+  background-size: 8px 8px;
+}
+
+html::-webkit-scrollbar-thumb:vertical:active {
+  background-image: none;
+  background-color: var(--fg);
+}
+
+html::-webkit-scrollbar-button:single-button {
+  display: block;
+  height: 14px;
+  background-color: var(--fg);
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: 8px 8px;
+  image-rendering: pixelated;
+  border: 2px solid var(--bg);
+  border-radius: 0;
+}
+
+html::-webkit-scrollbar-button:single-button:hover {
+  background-color: var(--accent);
+}
+
+html::-webkit-scrollbar-button:single-button:vertical:decrement {
+  background-image: url("data:image/svg+xml;charset=utf-8,%3Csvg xmlns='http://www.w3.org/2000/svg' width='8' height='8' shape-rendering='crispEdges'%3E%3Cpath fill='%23101113' d='M3 1h2v1h1v1h1v1h1v1H1V4h1V3h1V2h1z'/%3E%3C/svg%3E");
+}
+
+html::-webkit-scrollbar-button:single-button:vertical:increment {
+  background-image: url("data:image/svg+xml;charset=utf-8,%3Csvg xmlns='http://www.w3.org/2000/svg' width='8' height='8' shape-rendering='crispEdges'%3E%3Cpath fill='%23101113' d='M1 3h6v1h-1v1h-1v1H3V5H2V4H1z'/%3E%3C/svg%3E");
+}
+
+html::-webkit-scrollbar-corner {
+  background-color: var(--accent);
+  border-top: 2px solid var(--bg);
+  border-left: 2px solid var(--bg);
+}
+
+html,
+body {
+  overflow-x: clip;
+}
+
+body {
+  min-height: 100svh;
+  display: flex;
+  flex-direction: column;
+  background: var(--bg);
+  color: var(--fg);
+  font-family: var(--font-sans), system-ui, -apple-system, "Segoe UI", sans-serif;
+  font-size: var(--fs-body);
+  line-height: var(--lh-body);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  text-rendering: optimizeLegibility;
+  counter-reset: idx;
+}
+
+main {
+  flex: 1;
+}
+
+h1,
+h2,
+h3,
+.display {
+  font-family: var(--font-display), var(--font-sans), system-ui, sans-serif;
+  font-weight: 800;
+  line-height: var(--lh-heading);
+  letter-spacing: -0.02em;
+  text-wrap: balance;
+}
+
+h1 em,
+h2 em,
+.display em {
+  font-style: normal;
+  color: var(--accent);
+}
+
+p {
+  text-wrap: pretty;
+}
+
+a {
+  color: inherit;
+  text-underline-offset: 3px;
+  text-decoration-color: var(--line-strong);
+  transition: color 160ms ease, text-decoration-color 160ms ease;
+}
+
+a:hover {
+  text-decoration-color: var(--accent);
+}
+
+img,
+svg {
+  display: block;
+  max-width: 100%;
+}
+
+::selection {
+  background: var(--accent);
+  color: var(--accent-ink);
+}
+
+:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 3px;
+}
+
+/* ---------- Boot curtain (pre-hydration) ---------- */
+
+#boot-curtain {
+  position: fixed;
+  inset: 0;
+  z-index: 90;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  background: var(--bg-deep);
+  color: var(--fg);
+  padding: var(--gutter);
+  padding-top: var(--sp-5);
+  padding-bottom: var(--sp-5);
+}
+
+#boot-curtain .boot-word {
+  font-family: var(--font-display), var(--font-sans), system-ui, sans-serif;
+  font-weight: 800;
+  font-size: clamp(2.75rem, 12vw, 9rem);
+  line-height: 0.95;
+  letter-spacing: -0.02em;
+  white-space: nowrap;
+}
+
+#boot-curtain .boot-foot {
+  display: flex;
+  justify-content: space-between;
+  font-family: var(--font-label), var(--font-sans), system-ui, sans-serif;
+  font-weight: 700;
+  font-size: var(--fs-label);
+  letter-spacing: 0.18em;
+  color: var(--fg-soft);
+}
+
+/* ---------- Layout ---------- */
+
+.container {
+  width: 100%;
+  max-width: var(--maxw);
+  margin-inline: auto;
+  padding-inline: var(--gutter);
+}
+
+.section {
+  padding-block: var(--sp-7);
+}
+
+@media (min-width: 900px) {
+  .section {
+    padding-block: var(--sp-9);
+  }
+}
+
+/* Section index label: "01 / Selected work ———" — numbered automatically per page */
+.label {
+  display: flex;
+  align-items: center;
+  gap: var(--sp-3);
+  font-family: var(--font-label), var(--font-sans), system-ui, sans-serif;
+  font-size: var(--fs-label);
+  font-weight: 700;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--fg-soft);
+}
+
+.label::before {
+  counter-increment: idx;
+  content: counter(idx, decimal-leading-zero) " /";
+  color: var(--accent);
+  letter-spacing: 0.08em;
+}
+
+.label::after {
+  content: "";
+  flex: 1;
+  border-top: 1px solid var(--line);
+}
+
+.label--on-dark {
+  color: var(--fg-soft);
+}
+
+.theme-dark {
+  background: var(--bg-deep);
+  color: var(--fg);
+  border-block: 1px solid var(--line);
+}
+
+/* Faint blueprint grid used behind heroes */
+.grid-bg {
+  position: relative;
+  isolation: isolate;
+}
+
+.grid-bg::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  pointer-events: none;
+  background-image:
+    linear-gradient(var(--line) 1px, transparent 1px),
+    linear-gradient(90deg, var(--line) 1px, transparent 1px);
+  background-size: 88px 88px;
+  background-position: center top;
+  opacity: 0.35;
+  mask-image: radial-gradient(ellipse 75% 70% at 50% 35%, #000 30%, transparent 85%);
+}
+
+@media (min-width: 900px) {
+  .grid-bg::before {
+    background-size: 120px 120px;
+  }
+}
+
+/* ---------- Module card ---------- */
+
+.module {
+  position: relative;
+  isolation: isolate;
+  background: var(--card);
+  border: 1px solid var(--line);
+  transition:
+    transform 260ms var(--ease),
+    box-shadow 260ms var(--ease),
+    border-color 260ms var(--ease),
+    background-color 260ms ease;
+}
+
+/* Cursor spotlight (coordinates set by <Spotlight />) */
+.module::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  pointer-events: none;
+  opacity: 0;
+  transition: opacity 350ms ease;
+  background: radial-gradient(
+    300px circle at var(--mx, 50%) var(--my, 50%),
+    var(--accent-soft),
+    transparent 70%
+  );
+}
+
+.module--hover:hover,
+a.module:hover {
+  transform: translateY(-3px);
+  border-color: var(--line-strong);
+  box-shadow: 0 24px 40px -24px rgba(0, 0, 0, 0.7);
+  z-index: 2;
+}
+
+.module--hover:hover::after,
+a.module:hover::after {
+  opacity: 1;
+}
+
+/* Corner registration marks */
+.ticks {
+  --tick: var(--fg-soft);
+}
+
+.ticks::before {
+  content: "";
+  position: absolute;
+  inset: -4px;
+  z-index: 3;
+  pointer-events: none;
+  background:
+    linear-gradient(var(--tick), var(--tick)) top left / 9px 1px no-repeat,
+    linear-gradient(var(--tick), var(--tick)) top left / 1px 9px no-repeat,
+    linear-gradient(var(--tick), var(--tick)) top right / 9px 1px no-repeat,
+    linear-gradient(var(--tick), var(--tick)) top right / 1px 9px no-repeat,
+    linear-gradient(var(--tick), var(--tick)) bottom left / 9px 1px no-repeat,
+    linear-gradient(var(--tick), var(--tick)) bottom left / 1px 9px no-repeat,
+    linear-gradient(var(--tick), var(--tick)) bottom right / 9px 1px no-repeat,
+    linear-gradient(var(--tick), var(--tick)) bottom right / 1px 9px no-repeat;
+  transition: inset 260ms var(--ease);
+}
+
+.ticks:hover::before {
+  --tick: var(--accent);
+  inset: -7px;
+}
+
+/* Small mono tag */
+.chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4em;
+  padding: 0.3rem 0.7rem;
+  border: 1px solid var(--line);
+  font-family: var(--font-label), var(--font-sans), system-ui, sans-serif;
+  font-weight: 700;
+  font-size: 0.75rem;
+  letter-spacing: 0.03em;
+  line-height: 1.4;
+  color: var(--fg);
+  white-space: nowrap;
+}
+
+.chip--accent {
+  background: var(--accent);
+  border-color: var(--accent);
+  color: var(--accent-ink);
+}
+
+/* Pulsing status dot */
+.pulse {
+  position: relative;
+  display: inline-block;
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: var(--ok);
+  flex: none;
+}
+
+.pulse::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: 50%;
+  background: inherit;
+  animation: pulse 2s ease-out infinite;
+}
+
+@keyframes pulse {
+  from {
+    transform: scale(1);
+    opacity: 0.7;
+  }
+  to {
+    transform: scale(3);
+    opacity: 0;
+  }
+}
+
+/* ---------- Buttons ---------- */
+
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--sp-2);
+  min-height: 2.75rem;
+  padding: 0.7rem 1.15rem;
+  border: 1px solid var(--line-strong);
+  border-radius: 0;
+  background: transparent;
+  color: var(--fg);
+  font-family: var(--font-label), var(--font-sans), system-ui, sans-serif;
+  font-size: 0.75rem;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  text-decoration: none;
+  cursor: pointer;
+  transition:
+    transform 200ms var(--ease),
+    background-color 200ms ease,
+    border-color 200ms ease,
+    color 200ms ease;
+}
+
+.btn::after {
+  content: "→";
+  font-family: var(--font-sans), system-ui, sans-serif;
+  letter-spacing: 0;
+  transition: transform 200ms var(--ease);
+}
+
+.btn:hover {
+  border-color: var(--fg);
+  transform: translateY(-2px);
+}
+
+.btn:hover::after {
+  transform: translateX(3px);
+}
+
+.btn:active {
+  transform: translateY(0);
+}
+
+.btn--ink {
+  background: var(--fg);
+  border-color: var(--fg);
+  color: var(--bg);
+}
+
+.btn--ink:hover {
+  background: #fff;
+  border-color: #fff;
+}
+
+.btn--signal {
+  background: var(--accent);
+  border-color: var(--accent);
+  color: var(--accent-ink);
+}
+
+.btn--signal:hover {
+  background: color-mix(in oklab, var(--accent) 85%, #fff);
+  border-color: color-mix(in oklab, var(--accent) 85%, #fff);
+}
+
+.skip-link {
+  position: absolute;
+  left: var(--sp-4);
+  top: -100px;
+  z-index: 100;
+  padding: var(--sp-2) var(--sp-4);
+  background: var(--accent);
+  color: var(--accent-ink);
+  font-family: var(--font-label), var(--font-sans), system-ui, sans-serif;
+  font-weight: 700;
+  font-size: var(--fs-small);
+  text-decoration: none;
+  transition: top 150ms ease;
+}
+
+.skip-link:focus-visible {
+  top: var(--sp-2);
+}
+
+.visually-hidden {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  clip-path: inset(50%);
+  white-space: nowrap;
+}
+
+.rule {
+  border: 0;
+  border-top: 1px solid var(--line);
+}
+
+/* Line-up entrance for hero type (CSS only, content readable immediately if disabled) */
+.line-up {
+  display: block;
+  overflow: hidden;
+  padding-bottom: 0.08em;
+  margin-bottom: -0.08em;
+}
+
+.line-up > span {
+  display: inline-block;
+  animation: line-up 0.9s var(--ease) backwards;
+  animation-delay: var(--d, 0ms);
+}
+
+@keyframes line-up {
+  from {
+    transform: translateY(105%);
+  }
+}
+
+.fade-up {
+  animation: fade-up 0.8s var(--ease) backwards;
+  animation-delay: var(--d, 0ms);
+}
+
+@keyframes fade-up {
+  from {
+    opacity: 0;
+    transform: translateY(14px);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-delay: 0s !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}
+
+/* ---------- Custom cursor (see components/animation/CustomCursor.tsx) ---------- */
+
+html.has-custom-cursor,
+html.has-custom-cursor * {
+  cursor: none !important;
+}
+
+html.has-custom-cursor :is(input:not([type="checkbox"], [type="radio"], [type="submit"], [type="button"]), textarea, [contenteditable="true"]) {
+  cursor: text !important;
+}

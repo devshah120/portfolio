@@ -1,0 +1,222 @@
+.card {
+  --mono: ui-monospace, "Cascadia Code", "Cascadia Mono", "SF Mono", Menlo, Consolas, monospace;
+  --syn-kw: var(--accent);
+  --syn-str: #a8d5a2;
+  --syn-prop: #8fb8de;
+  --syn-fn: #f2c879;
+  --syn-bool: #d6a3e0;
+
+  margin: 0;
+  background: var(--bg-deep);
+  color: var(--fg);
+  font-family: var(--mono);
+}
+
+.card:hover::after {
+  opacity: 1;
+}
+
+/* ---------- Title bar ---------- */
+
+.titlebar {
+  display: flex;
+  align-items: center;
+  gap: var(--sp-3);
+  padding: 0 var(--sp-3) 0 var(--sp-4);
+  min-height: 2.5rem;
+  background: var(--card);
+  border-bottom: 1px solid var(--line);
+}
+
+.lights {
+  display: inline-flex;
+  gap: 6px;
+}
+
+.lights span {
+  width: 10px;
+  height: 10px;
+  border: 1px solid var(--line-strong);
+}
+
+.lights span:first-child {
+  background: var(--accent);
+  border-color: var(--accent);
+}
+
+.tab {
+  align-self: stretch;
+  display: inline-flex;
+  align-items: center;
+  padding-inline: var(--sp-3);
+  border-inline: 1px solid var(--line);
+  border-top: 2px solid var(--accent);
+  background: var(--bg-deep);
+  font-size: 0.75rem;
+  color: var(--fg);
+}
+
+.replay {
+  margin-left: auto;
+  padding: 0.3rem 0.6rem;
+  border: 1px solid var(--line);
+  background: transparent;
+  color: var(--fg-soft);
+  font-family: var(--mono);
+  font-size: 0.6875rem;
+  letter-spacing: 0.06em;
+  cursor: pointer;
+  transition: color 160ms ease, border-color 160ms ease;
+}
+
+.replay:hover:not(:disabled) {
+  color: var(--fg);
+  border-color: var(--line-strong);
+}
+
+.replay:disabled {
+  opacity: 0.4;
+  cursor: default;
+}
+
+/* ---------- Editor ---------- */
+
+.editor {
+  display: grid;
+  grid-template-columns: auto 1fr;
+  padding-block: var(--sp-4);
+  font-size: clamp(0.6875rem, 2.9vw, 0.8125rem);
+  line-height: 1.75;
+}
+
+@media (min-width: 900px) {
+  .editor {
+    font-size: clamp(0.75rem, 0.95vw, 0.9375rem);
+    padding-block: var(--sp-5);
+  }
+}
+
+.gutter {
+  list-style: none;
+  margin: 0;
+  padding: 0 var(--sp-3) 0 var(--sp-4);
+  border-right: 1px solid var(--line);
+  text-align: right;
+  color: var(--fg-faint);
+  user-select: none;
+}
+
+.activeLine {
+  color: var(--fg);
+}
+
+.code {
+  margin: 0;
+  padding-inline: var(--sp-4);
+  overflow: hidden;
+  font: inherit;
+  white-space: pre;
+  tab-size: 2;
+}
+
+.kw {
+  color: var(--syn-kw);
+}
+
+.str {
+  color: var(--syn-str);
+}
+
+.prop {
+  color: var(--syn-prop);
+}
+
+.fn {
+  color: var(--syn-fn);
+}
+
+.bool {
+  color: var(--syn-bool);
+}
+
+.com {
+  color: var(--fg-faint);
+  font-style: italic;
+}
+
+.punc {
+  color: var(--fg-soft);
+}
+
+.plain {
+  color: var(--fg);
+}
+
+/* Untyped characters keep their space so nothing reflows while typing */
+.ghost {
+  visibility: hidden;
+}
+
+.cursor {
+  display: inline-block;
+  width: 0.55em;
+  height: 1.15em;
+  margin-right: -0.55em;
+  vertical-align: text-bottom;
+  background: var(--accent);
+  animation: blink 1.05s steps(1) infinite;
+}
+
+@keyframes blink {
+  50% {
+    opacity: 0;
+  }
+}
+
+/* ---------- Terminal ---------- */
+
+.terminal {
+  display: grid;
+  gap: 0.15rem;
+  padding: var(--sp-3) var(--sp-4);
+  border-top: 1px dashed var(--line);
+  font-size: 0.75rem;
+  line-height: 1.6;
+}
+
+.terminal p {
+  transition: opacity 300ms ease, transform 300ms var(--ease);
+}
+
+.outHide {
+  opacity: 0;
+  transform: translateY(4px);
+}
+
+.outShow {
+  opacity: 1;
+  transform: none;
+}
+
+.prompt {
+  color: var(--fg-soft);
+}
+
+.ok {
+  color: var(--ok);
+}
+
+/* ---------- Status bar ---------- */
+
+.statusbar {
+  display: flex;
+  justify-content: space-between;
+  gap: var(--sp-3);
+  padding: var(--sp-2) var(--sp-4);
+  background: var(--card);
+  border-top: 1px solid var(--line);
+  font-size: 0.625rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--fg-soft);
+}

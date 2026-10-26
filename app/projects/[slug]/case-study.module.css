@@ -1,0 +1,138 @@
+.crumb {
+  font-family: var(--font-label), var(--font-sans), system-ui, sans-serif;
+  font-size: var(--fs-small);
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  margin-bottom: var(--sp-5);
+}
+
+.title {
+  font-size: var(--fs-display);
+  line-height: var(--lh-tight);
+  margin-top: var(--sp-4);
+}
+
+.tagline {
+  font-size: var(--fs-lead);
+  max-width: 46rem;
+  margin-top: var(--sp-4);
+}
+
+.facts {
+  display: grid;
+  gap: 0;
+  margin-top: var(--sp-6);
+  border: var(--border);
+  background: var(--surface);
+}
+
+.fact {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: var(--sp-1);
+  padding: var(--sp-3) var(--sp-4);
+  border-bottom: var(--border-thin);
+}
+
+.fact:last-child {
+  border-bottom: 0;
+}
+
+.fact dt {
+  font-family: var(--font-label), var(--font-sans), system-ui, sans-serif;
+  font-size: var(--fs-label);
+  font-weight: 700;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--concrete);
+}
+
+.fact dd {
+  margin: 0;
+  font-weight: 500;
+}
+
+.h2 {
+  font-size: var(--fs-h2);
+  margin-top: var(--sp-7);
+  padding-top: var(--sp-5);
+  border-top: var(--border);
+}
+
+.prose {
+  max-width: 46rem;
+  margin-top: var(--sp-3);
+}
+
+.points {
+  list-style: square;
+  max-width: 46rem;
+  margin-top: var(--sp-3);
+  padding-left: var(--sp-5);
+  display: grid;
+  gap: var(--sp-2);
+}
+
+.points li::marker {
+  color: var(--signal);
+}
+
+.linksBox {
+  margin-top: var(--sp-7);
+  border: 1px solid color-mix(in oklab, var(--accent) 35%, var(--line));
+  background: color-mix(in oklab, var(--accent) 6%, var(--bg-deep));
+  color: var(--fg);
+  padding: var(--sp-6);
+}
+
+.linksBox .h2 {
+  border: 0;
+  margin: 0;
+  padding: 0;
+}
+
+.linkRow {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--sp-4);
+  margin-top: var(--sp-4);
+}
+
+.next {
+  margin-top: var(--sp-7);
+}
+
+.next a {
+  display: block;
+  border: var(--border);
+  background: var(--surface);
+  padding: var(--sp-5) var(--sp-6);
+  text-decoration: none;
+  transition: translate 120ms ease, box-shadow 120ms ease;
+}
+
+.next a:hover {
+  translate: -2px -2px;
+}
+
+.nextLabel {
+  display: block;
+  font-family: var(--font-display), var(--font-sans), system-ui, sans-serif;
+  font-weight: 800;
+  font-size: var(--fs-h2);
+}
+
+.nextTag {
+  display: block;
+  margin-top: var(--sp-2);
+  max-width: 44rem;
+}
+
+@media (min-width: 900px) {
+  .fact {
+    grid-template-columns: 10rem 1fr;
+    gap: var(--sp-4);
+    align-items: baseline;
+  }
+}

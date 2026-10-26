@@ -1,0 +1,113 @@
+/* State lives on <html>: data-cursor (on/off), data-cursor-state
+   (default/hover/text), data-cursor-pressed. Positions are set from JS. */
+
+.cursor {
+  position: fixed;
+  inset: 0;
+  z-index: 1000;
+  pointer-events: none;
+  opacity: 0;
+  transition: opacity 200ms ease;
+}
+
+:global(html.has-custom-cursor[data-cursor="on"]) .cursor {
+  opacity: 1;
+}
+
+:global(html[data-cursor-state="text"]) .cursor {
+  opacity: 0;
+}
+
+.line,
+.mark,
+.label {
+  position: absolute;
+  top: 0;
+  left: 0;
+  will-change: transform;
+}
+
+/* ---------- Hairlines ---------- */
+
+.line {
+  background: color-mix(in oklab, var(--fg) 16%, transparent);
+  transition: background-color 200ms ease;
+}
+
+.h {
+  width: 100%;
+  height: 1px;
+}
+
+.v {
+  width: 1px;
+  height: 100%;
+}
+
+:global(html[data-cursor-state="hover"]) .line {
+  background: color-mix(in oklab, var(--accent) 55%, transparent);
+}
+
+/* ---------- Centre mark ---------- */
+
+.markShape {
+  position: absolute;
+  display: block;
+  width: 5px;
+  height: 5px;
+  translate: -50% -50%;
+  background: var(--accent);
+  transition:
+    width 220ms var(--ease),
+    height 220ms var(--ease),
+    background-color 200ms ease,
+    border-color 200ms ease,
+    scale 140ms var(--ease);
+  border: 1px solid transparent;
+}
+
+:global(html[data-cursor-state="hover"]) .markShape {
+  width: 18px;
+  height: 18px;
+  background: color-mix(in oklab, var(--accent) 16%, transparent);
+  border-color: var(--accent);
+}
+
+:global(html[data-cursor-pressed="true"]) .markShape {
+  scale: 0.75;
+}
+
+/* ---------- Coordinate readout ---------- */
+
+.label {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  padding: 3px 6px;
+  background: color-mix(in oklab, var(--bg-deep) 85%, transparent);
+  border: 1px solid var(--line);
+  font-family: ui-monospace, "Cascadia Mono", Menlo, Consolas, monospace;
+  font-size: 10px;
+  line-height: 1.4;
+  letter-spacing: 0.08em;
+  color: var(--fg-soft);
+  white-space: nowrap;
+  font-variant-numeric: tabular-nums;
+}
+
+.action {
+  display: none;
+  padding: 0 4px;
+  background: var(--accent);
+  color: var(--accent-ink);
+  font-weight: 700;
+  text-transform: uppercase;
+}
+
+:global(html[data-cursor-state="hover"]) .action {
+  display: inline;
+}
+
+:global(html[data-cursor-state="hover"]) .label {
+  border-color: color-mix(in oklab, var(--accent) 50%, var(--line));
+}
