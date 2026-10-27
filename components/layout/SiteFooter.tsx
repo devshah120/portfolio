@@ -56,13 +56,6 @@ export default function SiteFooter() {
             </Suspense>{" "}
             {site.name} — {site.location}
           </p>
-          <address className={styles.meta} style={{ fontStyle: "normal" }}>
-            <a href={`tel:${site.phone.replace(/\s/g, "")}`}>{site.phone}</a>
-            {" · "}
-            <a href={`mailto:${site.email}`}>{site.email}</a>
-            {" · "}
-            {site.location}
-          </address>
         </nav>
       </div>
     </footer>
