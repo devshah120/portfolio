@@ -32,8 +32,9 @@ const label = localFont({
   display: "swap",
 });
 
+const homeTitle = `${site.name} — ${site.role} · React, Node.js & Flutter`;
 const description =
-  `${site.name} — ${site.role} in ${site.city}. React and Node.js web apps, Flutter mobile apps, live GPS tracking and MERN projects.`;
+  `${site.name} — a ${site.role.toLowerCase()} based in ${site.location}. I build web applications with React and Node.js, design the databases behind them, and ship cross-platform mobile apps with Flutter.`;
 const homeCanonical = canonical("/");
 
 const keywords = [
@@ -52,7 +53,7 @@ const keywords = [
 export const metadata: Metadata = {
   ...(siteUrl ? { metadataBase: new URL(siteUrl) } : {}),
   title: {
-    default: `${site.name} — ${site.role}`,
+    default: homeTitle,
     template: `%s — ${site.name}`,
   },
   description,
@@ -63,7 +64,7 @@ export const metadata: Metadata = {
     type: "website",
     locale: "en_US",
     siteName: `${site.name} — Portfolio`,
-    title: `${site.name} — ${site.role}`,
+    title: homeTitle,
     description,
     ...(homeCanonical ? { url: homeCanonical } : {}),
     images: [
@@ -77,7 +78,7 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: "summary_large_image",
-    title: `${site.name} — ${site.role}`,
+    title: homeTitle,
     description,
     images: [
       {
