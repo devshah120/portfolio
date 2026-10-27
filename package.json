@@ -10,7 +10,7 @@
   },
   "dependencies": {
     "gsap": "^3.15.0",
-    "next": "16.4.0",
+    "next": "16.4.3",
     "react": "19.3.0",
     "react-dom": "19.3.0"
   },
@@ -20,7 +20,7 @@
     "@types/react-dom": "^19",
     "babel-plugin-react-compiler": "1.0.0",
     "eslint": "^9",
-    "eslint-config-next": "16.4.0",
+    "eslint-config-next": "16.4.3",
     "typescript": "^5"
   },
   "description": "Personal portfolio for Dev Shah, Software Engineer based in Ahmedabad, India. Built with Next.js App Router + TypeScript in a dark editorial-brutalist visual identity (charcoal #101113, off-white #E8E5DE, coral accent #FF6B55, Bricolage Grotesque).",
